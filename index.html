@@ -49,49 +49,50 @@
   <div class="parameters-container">
     <div class="parameter">
       <label for="simulationPeriod">(1.1) The simulation period [years]:</label>
-      <input type="range" id="simulationPeriod" min="5" max="100" value="30">
-      <span id="simulationPeriodValue">20</span>
+      <input type="range" id="simulationPeriod" min="0" max="50" value="20">
+      <span id="simulationPeriodValue">1</span>
     </div>
     <div class="parameter">
       <label for="numInstruments">(1.2) Number of instruments which will be calibrated:</label>
-      <input type="range" id="numInstruments" min="0" max="500" value="250" step="20">
-      <span id="numInstrumentsValue">250</span>
+      <input type="range" id="numInstruments" min="0" max="500" value="20" step="5">
+      <span id="numInstrumentsValue">1</span>
     </div>
     <div class="parameter">
       <label for="calibrationFrequency">(1.3) Calibrate each instrument every (calibration frequency) [years]:</label>
-      <input type="range" id="calibrationFrequency" min="0.5" max="10.5" value="3" step="0.5">
+      <input type="range" id="calibrationFrequency" min="1" max="5" value="2" step="1">
       <span id="calibrationFrequencyValue">1</span>
     </div>
 	 <h3>(2) External calibration service</h3>
     <div class="parameter">
       <label for="costPerCalibration"><span style="color: blue;">(2.1) Cost of the external calibration of one instrument [&euro; per instrument]:</span></label>
-      <input type="range" id="costPerCalibration" min="500" max="10000" value="2000" step="100">   <span id="costPerCalibrationValue">3000</span>
+      <input type="range" id="costPerCalibration" min="100" max="3000" value="500" step="50">
+      <span id="costPerCalibrationValue">1</span>
     </div>
     <div class="parameter">
       <label for="shippingCost"><span style="color: blue;">(2.2) Transport costs to and from the external calibration service provider [&euro; per instrument]:</span></label>
-      <input type="range" id="shippingCost" min="1000" max="5000" value="1000" step="100">
-      <span id="shippingCostValue">2000</span>
+      <input type="range" id="shippingCost" min="100" max="2000" value="300" step="50">
+      <span id="shippingCostValue">1</span>
     </div>
 	<h3>(3) CERN in-house calibration</h3>
     <div class="parameter">
-      <label for="facilityCost"><span style="color: red;">(3.1) The initial cost to build CERN calibration facilities  [&euro;]:</span></label>
-      <input type="range" id="facilityCost" min="50000" max="1000000" value="500000" step="1000">
-      <span id="facilityCostValue">200000</span>
+      <label for="facilityCost"><span style="color: red;">(3.1) The initial cost to build CERN calibration facilities with all the required equipment [&euro;]:</span></label>
+      <input type="range" id="facilityCost" min="1000" max="200000" value="10000" step="500">
+      <span id="facilityCostValue">1</span>
     </div>
     <div class="parameter">
-      <label for="maintenanceCost"><span style="color: red;">(3.2) Yearly cost of maintenance of CERN calibration facilities [&euro; per year]:</span></label>
-      <input type="range" id="maintenanceCost" min="5000" max="60000" value="10000" step="1000">
-      <span id="maintenanceCostValue">10000</span>
+      <label for="maintenanceCost"><span style="color: red;">(3.2) Cost of maintenance of CERN calibration facilities and equipment per year [&euro; per year]:</span></label>
+      <input type="range" id="maintenanceCost" min="500" max="20000" value="2000" step="100">
+      <span id="maintenanceCostValue">1</span>
     </div>
     <div class="parameter">
-      <label for="staffHourlyRate"><span style="color: red;">(3.3) Cost of CERN staff doing calibration [&euro; per hour]:</span></label>
-      <input type="range" id="staffHourlyRate" min="50" max="500" value="150" step="20">
-      <span id="staffHourlyRateValue">100</span>
+      <label for="staffHourlyRate"><span style="color: red;">(3.3) Cost of CERN staff performing calibration [&euro; per hour]:</span></label>
+      <input type="range" id="staffHourlyRate" min="40" max="500" value="100" step="20">
+      <span id="staffHourlyRateValue">1</span>
     </div>
     <div class="parameter">
       <label for="hoursPerInstrument"><span style="color: red;">(3.4) Number of working hours required to calibrate each instrument by CERN staff:</span></label>
       <input type="range" id="hoursPerInstrument" min="1" max="24" value="7">
-      <span id="hoursPerInstrumentValue">7</span>
+      <span id="hoursPerInstrumentValue">1</span>
     </div>
   </div>
 <hr>
@@ -162,11 +163,11 @@
       const time = Array.from({ length: simulationPeriod + 1 }, (_, i) => i);
 
       const internalCalibrationCost = time.map(t =>
-        facilityCost + (maintenanceCost * t) + (staffHourlyRate * numInstruments * 1/calibrationFrequency * hoursPerInstrument * t)
+        facilityCost + (maintenanceCost * t) + (staffHourlyRate * hoursPerInstrument * numInstruments * 1/calibrationFrequency * t)
       );
 
       const externalCalibrationCost = time.map(t =>
-        (costPerCalibration * numInstruments* 1/calibrationFrequency * t) + (shippingCost * numInstruments * 2 * t)
+        (costPerCalibration * numInstruments* 1/calibrationFrequency * t) + (shippingCost * numInstruments  * 1/calibrationFrequency * t)
       );
 
       return { time, internalCalibrationCost, externalCalibrationCost };
