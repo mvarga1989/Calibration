@@ -2,7 +2,7 @@
 <html>
 <title>Calibration Cost Analysis</title>
 <head>
-  <title>'Comparison of Internal (CERN) and External Calibration Costs'</title>
+  <title>'Comparison of Internal and External Calibration Costs'</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -41,7 +41,7 @@
   </style>
 </head>
 <body>
-<h1>Compare the costs of the external calibration service with in-house calibration</h1>
+<h1>Compare the costs of in-house and external-service calibration of geodetic insturments</h1>
 <h6>This is a web-based tool for comparing the costs of external calibration services with in-house calibration. It allows users to input various parameters related to the calibration process and then visualizes the resulting costs over a specified simulation period. The parameters include the simulation period, number of instruments, calibration frequency, costs of external calibration and shipping, initial and maintenance costs for in-house calibration facilities, hourly rate for staff, and hours per instrument for calibration. The line chart displays the total costs of external and internal calibration over the simulation period.</h6>
 <hr>
 	<h2>User defined parameters:</h2>
@@ -54,7 +54,7 @@
     </div>
     <div class="parameter">
       <label for="numInstruments">(1.2) Number of instruments which will be calibrated:</label>
-      <input type="range" id="numInstruments" min="0" max="500" value="20" step="5">
+      <input type="range" id="numInstruments" min="0" max="300" value="20" step="1">
       <span id="numInstrumentsValue">1</span>
     </div>
     <div class="parameter">
@@ -73,24 +73,24 @@
       <input type="range" id="shippingCost" min="100" max="2000" value="300" step="50">
       <span id="shippingCostValue">1</span>
     </div>
-	<h3>(3) CERN in-house calibration</h3>
+	<h3>(3) In-house calibration</h3>
     <div class="parameter">
-      <label for="facilityCost"><span style="color: red;">(3.1) The initial cost to build CERN calibration facilities with all the required equipment [&euro;]:</span></label>
+      <label for="facilityCost"><span style="color: red;">(3.1) The initial cost to build calibration facilities with all the required equipment [&euro;]:</span></label>
       <input type="range" id="facilityCost" min="1000" max="200000" value="10000" step="500">
       <span id="facilityCostValue">1</span>
     </div>
     <div class="parameter">
-      <label for="maintenanceCost"><span style="color: red;">(3.2) Cost of maintenance of CERN calibration facilities and equipment per year [&euro; per year]:</span></label>
+      <label for="maintenanceCost"><span style="color: red;">(3.2) Cost of maintenance of calibration facilities and equipment per year [&euro; per year]:</span></label>
       <input type="range" id="maintenanceCost" min="500" max="20000" value="2000" step="100">
       <span id="maintenanceCostValue">1</span>
     </div>
     <div class="parameter">
-      <label for="staffHourlyRate"><span style="color: red;">(3.3) Cost of CERN staff performing calibration [&euro; per hour]:</span></label>
-      <input type="range" id="staffHourlyRate" min="40" max="500" value="100" step="20">
+      <label for="staffHourlyRate"><span style="color: red;">(3.3) Cost of staff performing calibration [&euro; per hour]:</span></label>
+      <input type="range" id="staffHourlyRate" min="40" max="500" value="100" step="10">
       <span id="staffHourlyRateValue">1</span>
     </div>
     <div class="parameter">
-      <label for="hoursPerInstrument"><span style="color: red;">(3.4) Number of working hours required to calibrate each instrument by CERN staff:</span></label>
+      <label for="hoursPerInstrument"><span style="color: red;">(3.4) Number of working hours required to calibrate each instrument by staff:</span></label>
       <input type="range" id="hoursPerInstrument" min="1" max="24" value="7">
       <span id="hoursPerInstrumentValue">1</span>
     </div>
@@ -103,7 +103,7 @@
     </div>
   </div>
   
-  Created by Matej Varga. All rights reserved. Version 0.0.2.
+  Created by Matej Varga. All rights reserved. Version 0.0.3.
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
     const numInstrumentsInput = document.getElementById('numInstruments');
